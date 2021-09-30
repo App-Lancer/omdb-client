@@ -41,7 +41,8 @@ class App extends Component {
     this.setState({
       noRecordsFound : false,
       isSavedComparisonView : false,
-      savedComparisons : []
+      savedComparisons : [],
+      selectedMovies : []
     });
     textInputOnchange(this, event)
   }
@@ -95,7 +96,6 @@ class App extends Component {
       selectedMovies:movies,
       isCompareView: true,
       noRecordsFound : false,
-      isSavedComparisonView: false,
       dataSource : []
     })
   }
@@ -109,7 +109,7 @@ class App extends Component {
             <input type="button" className="saved-btn" value="Saved Comparisons" id="savedComparison" onClick={this.onClickSavedComparison}/>
           </div>
         </div>
-        {this.state.selectedMovies.length > 1 ?
+        {this.state.selectedMovies.length > 1 &&  !this.state.isSavedComparisonView?
           <input id="compareButton" type="button" className="saved-btn compare-btn" value="Compare" onClick={this.compare}/> : null}
         {this.state.noRecordsFound ? 
           <div class="error"> No records Found </div>
@@ -130,10 +130,12 @@ class App extends Component {
         {this.state.isCompareView ? 
         <div id="compareView" className= "compareView" onClick={this.compare}>
           <div className= "compareViewContent">
-            <div style={{marginTop: "16px"}}>
+            {!this.state.isSavedComparisonView ? 
+              <div style={{marginTop: "16px"}}>
               <input id="saveInput" type="text" className="search compare" placeholder="Name"/>
               <input type="button" className="saved-btn" value="Save" onClick={this.saveCompare}/>
             </div>
+            :null}
             <div className="card-view compare">
               {this.state.selectedMovies.map((card)=>{
                 return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false} detailedView = {true} heighlighted={card.id == this.state.maxComparisonScoreId} />;
