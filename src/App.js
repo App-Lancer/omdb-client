@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import './App.css';
 import Card from './components/card/card';
-import { searchMovies } from './controller';
+import { searchMovies} from './controller';
 
 class App extends Component {
 
