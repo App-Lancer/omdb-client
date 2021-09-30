@@ -54,6 +54,9 @@ export default class Card extends Component {
                 <div className="title">
                     {data.title}
                 </div>
+                <div className="plot">
+                    {data.plot}
+                </div>
             </div>
         )
     }
