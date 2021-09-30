@@ -1,12 +1,59 @@
 .card{
     width: 150px;
-    height: 200px;
     margin: 30px;
-    box-shadow: 1px 1px 5px rgba(65, 63, 63, 0.25);
-    border-radius: 5px;
+    border-radius: 10px;
+    border-color: #393A49;
+    border-width: 1px;
+    border-style: solid;
+    position: relative;
+    background-color:#22252F;
+    padding: 10px;
 }
 
 .poster{
-    width: 150px;
-    height: 180px;
+    width: 100%;
+    height: 200px;
+}
+
+.poster > img{
+    border-radius:10px;
+    height: 100%;
+    width: 100%;
+}
+
+.details{
+    margin-top:25px;
+    display: flex;
+    align-items: center;
+    justify-content:start;
+}
+
+.rating{
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #FFCC1B;
+    padding: 5px 5px;
+    font-size: 12px;
+    color: white;
+}
+.star{
+    color: #FFCC1B;
+    margin-right: 5px;
+}
+
+.type{
+    margin-left: 10px;
+    font-size: 15px;
+    color: #68686d;
+}
+
+.title{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bolder;
+    font-size: 19px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
