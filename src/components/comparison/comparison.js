@@ -22,10 +22,10 @@ export default class Comparison extends Component{
 
     render(){
         return(
-            <div className="comparison-row">
+            <div className="comparison-row" id={this.props.data.id} onClick={this.onFetch}>
                 <div className="comparison-id">{this.props.data.id}</div>
                 <div className="comparison-name">{this.props.data.name}</div>
-                <input type="button" className="view-details-btn" value="View Details" id={this.props.data.id} onClick={this.onFetch}/>
+                {/* <input type="button" className="view-details-btn" value="View Details" /> */}
             </div>
         )
     }
