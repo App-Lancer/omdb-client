@@ -9,10 +9,12 @@ class App extends Component {
     super(props);
     this.state = {
       selectedMovies: [],
-      dataSource : []
+      dataSource : [],
+      isCompareView: false,
     }
     this.onCardSelected = this.onCardSelected.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.compare = this.compare.bind(this);
   }
   
 
@@ -27,12 +29,16 @@ class App extends Component {
     }
     else{
       selectedMovies = selectedMovies.filter((elem)=>{
-          console.log(elem.id, card.id);
-          return elem.id != card.id
-        })
+        return elem.id != card.id
+      })
     }
-    console.log(selectedMovies)
     this.setState({selectedMovies: selectedMovies})
+  }
+
+  compare(event){
+    this.setState({
+      isCompareView: !this.state.isCompareView
+    })
   }
 
   render() {
@@ -45,11 +51,23 @@ class App extends Component {
             <input type="button" className="saved-btn" value="Save"/>
           </div>
         </div>
+        {this.state.selectedMovies.length > 1 ?
+          <input type="button" className="saved-btn compare-btn" value="Compare" onClick={this.compare}/> : null}
         <div className="card-view">
           {this.state.dataSource.map((card)=>{
-            return <Card data={card} onCardSelected={this.onCardSelected}/>
+            return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={this.state.selectedMovies.length < 3 && !this.state.isCompareView}/>
           })}
         </div>
+        {this.state.isCompareView ? 
+        <div className= "compareView" onClick={this.compare}> 
+          <div className="card-view compare">
+            {this.state.selectedMovies.map((card)=>{
+              return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false}/>
+            })}
+          </div>
+        </div>:null
+        }
+        
       </div>
     );
   }

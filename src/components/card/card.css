@@ -79,8 +79,9 @@
     box-shadow: -1px 5px 10px rgba(0, 0, 0, 0.486);
 }
 
-.checkBox:disabled{
-    opacity: 0.5;
+.checkBox.disabled{
+    opacity: 0;
+    pointer-events: none;
 }
 
 .checkBox-fill{
@@ -91,6 +92,6 @@
     opacity: 0;
 }
 
-.checkBox-fill.active{
+.checkBox.active > .checkBox-fill{
     opacity: 1;
 }

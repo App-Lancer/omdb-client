@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   background-color:#27283A;
+  min-height: 100vh;
 }
 
 .nav{
@@ -63,6 +64,11 @@
   scale: 0.98;
 }
 
+.compare-btn{
+  width: 200px;
+  margin-left: 60px;
+}
+
 .card-view{
   padding: 10px;
   /* padding-top: 50px; */
@@ -71,4 +77,22 @@
   /* align-items: center; */
   /* justify-content:center; */
   flex-wrap: wrap;
+}
+
+.compareView{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.795);
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-view.compare{
+  background-color: rgb(28, 40, 71);
+  border-radius: 20px;
 }

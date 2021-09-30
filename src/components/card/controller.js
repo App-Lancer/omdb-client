@@ -10,6 +10,7 @@ export class CardData{
     poster = ""
     ratings = [{}]
     imdbScore = ""
+    selected = false
 
     constructor(data){
         this.id = data.imdbID;

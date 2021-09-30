@@ -13,24 +13,29 @@ export default class Card extends Component {
     }
 
     toggleCheckBox(event){
-        let checkBox = event.target;
+        this.setState({
+            isSelected: !this.state.isSelected
+        }, ()=>{
+            this.props.data.isSelected = this.state.isSelected
+            this.props.onCardSelected(this.props.data, this.state.isSelected);
+        });
+        let checkBox = document.getElementById(`${this.props.data.id}_checkbox`);
         checkBox.classList.toggle('active')
-        console.log(checkBox.classList.contains('active'))
-        this.props.onCardSelected(this.data, checkBox.classList.contains('active'));
     }
 
     render() {
+        let canBeSelected = this.props.canBeSelected || this.props.data.isSelected
         return(
             <div className="card">
                 <div className="poster">
                     <img src={this.props.data.poster} style={{objectFit: 'cover'}}/>
-                    <div className="checkBox" disabled={true}>
-                        <div className="checkBox-fill" onClick={this.toggleCheckBox}></div>
+                    <div id = {`${this.props.data.id}_checkbox`} className={canBeSelected ? (this.props.data.isSelected ? "checkBox active" : "checkBox") : "checkBox disabled"} onClick={this.toggleCheckBox}>
+                        <div className="checkBox-fill"></div>
                     </div>
                 </div>
                 <div className="details">
                     <div className="rating">
-                        <i class="fa fa-star star"></i>
+                        <i className="fa fa-star star"></i>
                         {this.props.data.imdbRating}
                     </div>
                     <div className="type">

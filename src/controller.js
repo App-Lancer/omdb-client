@@ -2,8 +2,6 @@ import { CardData } from "./components/card/controller";
 
 function searchMovies(that){
     var searchTerm = document.getElementById("search").value;
-    console.log(searchTerm);
-    console.log(searchTerm.length);
     if(searchTerm.length >= 3){
         console.log("Hello "+searchTerm);
         fetch("http://6244-59-93-225-115.ngrok.io/search/" + searchTerm, {
@@ -17,7 +15,6 @@ function searchMovies(that){
                     let card = new CardData(data[index]);
                     movieRecords.push(card);
                 }
-                console.log(data);
                 console.log(movieRecords);
 
                 that.setState({dataSource: movieRecords})
