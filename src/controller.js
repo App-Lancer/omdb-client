@@ -1,4 +1,5 @@
 import { CardData } from "./components/card/controller";
+import { ComparisonData } from "./components/comparison/controller";
 
 function searchMovies(that){
     var searchTerm = document.getElementById("search").value;
@@ -15,7 +16,6 @@ function searchMovies(that){
                     let card = new CardData(data[index]);
                     movieRecords.push(card);
                 }
-                console.log(movieRecords);
 
                 that.setState({dataSource: movieRecords})
 
@@ -34,17 +34,25 @@ export var textInputOnchange = (that, event)=>{
     }, 1000)
 }
 
-export function getComparisonList(){
+export var getComparisonList = (that) => {
     fetch("http://localhost:8080/comparison", {
         method : "GET"
     })
         .then(result => result.json())
         .then(data => {
-            console.log(data);
+
+            var comparisonRecords = [];
+
+                for(let index=0; index<data.length; index++){
+                    let comparison = new ComparisonData(data[index]);
+                    comparisonRecords.push(comparison);
+                }
+
+            that.setState({savedComparisons: comparisonRecords})
         })
 }
 
-export function getComparison(id){
+export var getComparison = (id) => {
     fetch("http://localhost:8080/comparison/" + id,{
         method : "GET"
     })

@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import './App.css';
 import Card from './components/card/card';
-import { textInputOnchange } from './controller';
+import Comparison from './components/comparison/comparison';
+import { getComparisonList, textInputOnchange } from './controller';
 
 class App extends Component {
 
@@ -11,14 +12,32 @@ class App extends Component {
       selectedMovies: [],
       dataSource : [],
       isCompareView: false,
+      isSavedComparisonView : false,
+      savedComparisons : []
     }
     this.onCardSelected = this.onCardSelected.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.compare = this.compare.bind(this);
+    this.onClickSavedComparison = this.onClickSavedComparison.bind(this);
+  }
+
+  onClickSavedComparison(event){
+    var target = event.target;
+    if(target.id == "savedComparison"){
+      this.setState({
+        isSavedComparisonView: !this.state.isSavedComparisonView,
+        dataSource : []
+      });
+      getComparisonList(this);
+    }
   }
   
 
   onInputChange(event){
+    this.setState({
+      isSavedComparisonView : false,
+      savedComparisons : []
+    });
     textInputOnchange(this, event)
   }
 
@@ -55,7 +74,7 @@ class App extends Component {
         <div className="nav">
           <input type="text" id="search" className="search" placeholder="Search" onChange={this.onInputChange}/>
           <div className="actions">
-            <input type="button" className="saved-btn" value="Saved Comparisons"/>
+            <input type="button" className="saved-btn" value="Saved Comparisons" id="savedComparison" onClick={this.onClickSavedComparison}/>
           </div>
         </div>
         {this.state.selectedMovies.length > 1 ?
@@ -65,6 +84,14 @@ class App extends Component {
             return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={this.state.selectedMovies.length < 3 && !this.state.isCompareView}/>
           })}
         </div>
+        {this.state.isSavedComparisonView ? 
+          <div className="comparison-list-view">
+          {this.state.savedComparisons.map((comparison)=>{
+            return <Comparison data={comparison} />
+          })}
+        </div>
+        : null}
+
         {this.state.isCompareView ? 
         <div id="compareView" className= "compareView" onClick={this.compare}>
           <div className= "compareViewContent">
