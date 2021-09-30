@@ -1,37 +1,56 @@
 import {Component} from 'react'
 import './App.css';
 import Card from './components/card/card';
-import { searchMovies } from './controller';
+import { textInputOnchange } from './controller';
 
 class App extends Component {
 
-  state = {
-    selectedMovies: [],
-    dataSource : []
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedMovies: [],
+      dataSource : []
+    }
+    this.onCardSelected = this.onCardSelected.bind(this);
+  }
+
+  onCardSelected(card, selected){
+    var selectedMovies = this.state.selectedMovies;
+    if (selected){
+      selectedMovies.push(card);
+    }
+    else{
+      selectedMovies = selectedMovies.filter((elem)=>{
+          console.log(elem.id, card.id);
+          return elem.id != card.id
+        })
+    }
+    console.log(selectedMovies)
+    this.setState({selectedMovies: selectedMovies})
   }
 
   render() {
     return (
       <div className="App">
         <div className="nav">
-          <input type="text" className="search" placeholder="Search" onChange={searchMovies}/>
+          <input type="text" id="search" className="search" placeholder="Search" onChange={textInputOnchange}/>
           <div className="actions">
             <input type="button" className="saved-btn" value="Saved Comparisons"/>
-            {/* <input type="button" className="save-btn" value="Save"/> */}
+            <input type="button" className="saved-btn" value="Save"/>
           </div>
         </div>
         <div className="card-view">
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
+          <Card onCardSelected={this.onCardSelected}/>
         </div>
       </div>
     );

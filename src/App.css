@@ -44,17 +44,23 @@
 .saved-btn{
   background: transparent;
   border: none;
-  /* border-width: 0px 0px 3px 0px; */
-  /* border-color: white; */
+  border-width: 2px;
+  padding: 10px;
+  border-color: rgb(96, 96, 136);
+  border-style: solid;
+  border-radius: 5px;
   color: white;
   font-size: 15px;
-  transition: all 0.5s;
+  transition: all 0.2s;
 }
 
 .saved-btn:hover{
-  border: none;
   cursor: auto;
-  scale: 1.05;
+  border-color: #383953;
+}
+
+.saved-btn:active{
+  scale: 0.98;
 }
 
 .card-view{

@@ -12,6 +12,7 @@ export class CardData{
     imdbScore = ""
 
     constructor(data){
+        this.id = data.imdbID;
         this.title = data.Title;
         this.type = data.Type;
         this.year = data.Year;
