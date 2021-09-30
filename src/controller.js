@@ -35,7 +35,7 @@ export var textInputOnchange = (that, event)=>{
 }
 
 export function getComparisonList(){
-    fetch("http://localhost:8080/comparison", {
+    fetch("http://6244-59-93-225-115.ngrok.io/comparison", {
         method : "GET"
     })
         .then(result => result.json())
@@ -45,12 +45,30 @@ export function getComparisonList(){
 }
 
 export function getComparison(id){
-    fetch("http://localhost:8080/comparison/" + id,{
+    fetch("http://6244-59-93-225-115.ngrok.io/comparison/" + id,{
         method : "GET"
     })
-        .then(result => result.json())
-        .then(data => {
-            console.log(data);
-        })
+    .then(result => result.json())
+    .then(data => {
+        console.log(data);
+    })
+}
+
+export function saveCompariosn(name, movies){
+    var rawDatas = []
+    for(let movie of movies) {
+        rawDatas.push(movie.rawData)
+    }
+    fetch("http://6244-59-93-225-115.ngrok.io/comparison",{
+        method : "POST",
+        body : JSON.stringify({name: name, movies: rawDatas}),
+        headers :{
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(result => result.json())
+    .then(data => {
+        console.log(data);
+    })
 }
 

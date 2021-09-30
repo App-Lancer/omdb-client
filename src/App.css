@@ -36,7 +36,7 @@
   width: 300px;
   font-size: 15px;
   margin-left: 0px;
-  margin-bottom: 20px;
+  margin-right: 16px;
 }
 
 .actions{
@@ -87,8 +87,12 @@
   flex-wrap: wrap;
 }
 
+.card-view.compare{
+  overflow: scroll;
+}
+
 .compareView{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.795);
@@ -109,4 +113,5 @@
   align-items: center;
   flex-direction: column;
   padding-bottom: 16px;
+  max-height: 90%;
 }

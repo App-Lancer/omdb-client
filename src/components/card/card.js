@@ -26,7 +26,7 @@ export default class Card extends Component {
     render() {
         let canBeSelected = this.props.canBeSelected || this.props.data.isSelected
         return(
-            <div className="card">
+            <div className={this.props.detailedView ? "card detailed" : "card"}>
                 <div className="poster">
                     <img src={this.props.data.poster} style={{objectFit: 'cover'}}/>
                     <div id = {`${this.props.data.id}_checkbox`} className={canBeSelected ? (this.props.data.isSelected ? "checkBox active" : "checkBox") : "checkBox disabled"} onClick={this.toggleCheckBox}>
@@ -45,9 +45,48 @@ export default class Card extends Component {
                 <div className="title">
                     {this.props.data.title}
                 </div>
-                <div className="plot">
+                <div className={"plot" + (this.props.detailedView ? " detailed" : "")}>
                     {this.props.data.plot}
                 </div>
+                {this.props.detailedView ? 
+                <div className="detailsView">
+                    <div>
+                        Genre
+                    </div>
+                    <div className="detail">
+                        {this.props.data.genre}
+                    </div>
+                    <div>
+                        Released
+                    </div>
+                    <div className="detail">
+                        {this.props.data.released}
+                    </div>
+                    <div>
+                        Language
+                    </div>
+                    <div className="detail">
+                        {this.props.data.language}
+                    </div>
+                    <div>
+                        Awards
+                    </div>
+                    <div className="detail">
+                        {this.props.data.awards}
+                    </div>
+                    <div>
+                        Rated
+                    </div>
+                    <div className="detail">
+                        {this.props.data.rated}
+                    </div>
+                    <div>
+                        Rated
+                    </div>
+                    <div className="detail">
+                        {this.props.data.rated}
+                    </div>
+                </div> : null}
             </div>
         )
     }

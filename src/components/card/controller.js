@@ -10,6 +10,7 @@ export class CardData{
     poster = ""
     ratings = [{}]
     imdbScore = ""
+    rawData = {}
     selected = false
 
     constructor(data){
@@ -24,6 +25,10 @@ export class CardData{
         this.poster = data.Poster;
         this.ratings = data.Ratings;
         this.imdbRating = data.imdbRating;
+        this.awards = data.Awards;
+        this.rated = data.Rated;
+        this.rawData = data;
+
     }
 
 }

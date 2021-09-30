@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import './App.css';
 import Card from './components/card/card';
-import { textInputOnchange } from './controller';
+import { textInputOnchange, saveCompariosn } from './controller';
 
 class App extends Component {
 
@@ -46,7 +46,14 @@ class App extends Component {
 
   saveCompare = (event)=>{
     let target = document.getElementById("saveInput")
-    console.log(target.value)
+    let name = target.value
+    if (name.length == 0){
+      return
+    }
+    saveCompariosn(name, this.state.selectedMovies)
+    this.setState({
+      isCompareView: false
+    })
   }
 
   render() {
@@ -62,22 +69,20 @@ class App extends Component {
           <input id="compareButton" type="button" className="saved-btn compare-btn" value="Compare" onClick={this.compare}/> : null}
         <div className="card-view">
           {this.state.dataSource.map((card)=>{
-            return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={this.state.selectedMovies.length < 3 && !this.state.isCompareView}/>
+            return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={this.state.selectedMovies.length < 3 && !this.state.isCompareView} detailedView = {false} />
           })}
         </div>
         {this.state.isCompareView ? 
         <div id="compareView" className= "compareView" onClick={this.compare}>
           <div className= "compareViewContent">
+            <div style={{marginTop: "16px"}}>
+              <input id="saveInput" type="text" className="search compare" placeholder="Name"/>
+              <input type="button" className="saved-btn" value="Save" onClick={this.saveCompare}/>
+            </div>
             <div className="card-view compare">
               {this.state.selectedMovies.map((card)=>{
-                return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false}/>
+                return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false} detailedView = {true} />;
               })}
-            </div>
-            <div>
-              <input id="saveInput" type="text" className="search compare" placeholder="Name"/>
-            </div>
-            <div>
-              <input type="button" className="saved-btn" value="Save" onClick={this.saveCompare}/>
             </div>
           </div>
         </div>:null

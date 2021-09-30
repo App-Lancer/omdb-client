@@ -1,5 +1,5 @@
 .card{
-    width: 170px;
+    width: 200px;
     margin: 20px;
     border-radius: 20px;
     border-color: #393A49;
@@ -8,6 +8,11 @@
     position: relative;
     background-color:#22252F;
     padding: 10px;
+}
+
+.card.detailed{
+    width: 300px;
+    margin: 10px;
 }
 
 .poster{
@@ -57,11 +62,16 @@
     font-size: 19px;
     text-overflow: ellipsis;
     overflow: hidden;
+    height: 50px;
 }
 
 .plot{
     font-size: 12px;
     color: #68686d;
+    height: 80px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .checkBox{
@@ -94,4 +104,19 @@
 
 .checkBox.active > .checkBox-fill{
     opacity: 1;
+}
+
+.detailsView{
+    color: white;
+    margin-top:16px;
+    margin-bottom: 16px;
+}
+
+.detailsView > div{
+    margin-top:13px;
+}
+
+.detailsView > .detail{
+    color: #68686d;
+    font-size: 14px;
 }
