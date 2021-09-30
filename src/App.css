@@ -39,6 +39,11 @@
   margin-right: 16px;
 }
 
+.error{
+  color: white;
+  align-self: center;
+}
+
 .actions{
   /* background-color: red; */
   height: 100%;
