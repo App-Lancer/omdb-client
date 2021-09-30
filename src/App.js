@@ -12,6 +12,12 @@ class App extends Component {
       dataSource : []
     }
     this.onCardSelected = this.onCardSelected.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+  }
+  
+
+  onInputChange(event){
+    textInputOnchange(this, event)
   }
 
   onCardSelected(card, selected){
@@ -33,24 +39,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="nav">
-          <input type="text" id="search" className="search" placeholder="Search" onChange={textInputOnchange}/>
+          <input type="text" id="search" className="search" placeholder="Search" onChange={this.onInputChange}/>
           <div className="actions">
             <input type="button" className="saved-btn" value="Saved Comparisons"/>
             <input type="button" className="saved-btn" value="Save"/>
           </div>
         </div>
         <div className="card-view">
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
-          <Card onCardSelected={this.onCardSelected}/>
+          {this.state.dataSource.map((card)=>{
+            return <Card data={card} onCardSelected={this.onCardSelected}/>
+          })}
         </div>
       </div>
     );
