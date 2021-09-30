@@ -13,7 +13,8 @@ class App extends Component {
       dataSource : [],
       isCompareView: false,
       isSavedComparisonView : false,
-      savedComparisons : []
+      savedComparisons : [],
+      noRecordsFound : false
     }
     this.onCardSelected = this.onCardSelected.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
@@ -25,6 +26,8 @@ class App extends Component {
     var target = event.target;
     if(target.id == "savedComparison"){
       this.setState({
+        noRecordsFound : false,
+        selectedMovies : [],
         isSavedComparisonView: !this.state.isSavedComparisonView,
         dataSource : []
       });
@@ -35,6 +38,7 @@ class App extends Component {
 
   onInputChange(event){
     this.setState({
+      noRecordsFound : false,
       isSavedComparisonView : false,
       savedComparisons : []
     });
@@ -79,6 +83,9 @@ class App extends Component {
         </div>
         {this.state.selectedMovies.length > 1 ?
           <input id="compareButton" type="button" className="saved-btn compare-btn" value="Compare" onClick={this.compare}/> : null}
+        {this.state.noRecordsFound ? 
+          <div class="error"> No records Found </div>
+        : null}
         <div className="card-view">
           {this.state.dataSource.map((card)=>{
             return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={this.state.selectedMovies.length < 3 && !this.state.isCompareView}/>

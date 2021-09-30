@@ -4,7 +4,6 @@ import { ComparisonData } from "./components/comparison/controller";
 function searchMovies(that){
     var searchTerm = document.getElementById("search").value;
     if(searchTerm.length >= 3){
-        console.log("Hello "+searchTerm);
         fetch("http://6244-59-93-225-115.ngrok.io/search/" + searchTerm, {
             method : "GET"
         })
@@ -12,13 +11,16 @@ function searchMovies(that){
             .then(data => {
                 var movieRecords = [];
 
-                for(let index=0; index<data.length; index++){
-                    let card = new CardData(data[index]);
-                    movieRecords.push(card);
+                if(data.Error == "Movie not found!"){
+                    that.setState({noRecordsFound : true});
+                }else{
+                    for(let index=0; index<data.length; index++){
+                        let card = new CardData(data[index]);
+                        movieRecords.push(card);
+                    }
+    
+                    that.setState({dataSource: movieRecords})
                 }
-
-                that.setState({dataSource: movieRecords})
-
             })
             .catch(err => {
                 console.log(err);
@@ -41,14 +43,17 @@ export var getComparisonList = (that) => {
         .then(result => result.json())
         .then(data => {
 
-            var comparisonRecords = [];
+            if((data instanceof Array && data.length == 0) || data.message == "Internal Error"){
+                that.setState({noRecordsFound: true});
+            }else{
+                var comparisonRecords = [];
 
-                for(let index=0; index<data.length; index++){
-                    let comparison = new ComparisonData(data[index]);
-                    comparisonRecords.push(comparison);
-                }
-
-            that.setState({savedComparisons: comparisonRecords})
+                    for(let index=0; index<data.length; index++){
+                        let comparison = new ComparisonData(data[index]);
+                        comparisonRecords.push(comparison);
+                    }
+                that.setState({savedComparisons: comparisonRecords});
+            }
         })
 }
 
