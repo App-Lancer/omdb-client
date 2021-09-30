@@ -21,7 +21,7 @@ export class CardData{
         this.language = data.Language;
         this.poster = data.Poster;
         this.ratings = data.Ratings;
-        this.imdbScore = data.imdbRating;
+        this.imdbRating = data.imdbRating;
     }
 
 }

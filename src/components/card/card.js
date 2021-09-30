@@ -1,6 +1,6 @@
 import { Component } from 'react'; 
 import './card.css';
-import {CardData} from './controller'
+import { CardData } from './controller'
 
 export default class Card extends Component {
     state = { 
@@ -39,11 +39,20 @@ export default class Card extends Component {
         })
         return(
             <div className="card">
+                <div className="poster">
+                    <img src={data.poster} style={{objectFit: 'cover'}}/> 
+                </div>
+                <div className="details">
+                    <div className="rating">
+                        <i class="fa fa-star star"></i>
+                        {data.imdbRating}
+                    </div>
+                    <div className="type">
+                        {data.type}
+                    </div>
+                </div>
                 <div className="title">
                     {data.title}
-                </div>
-                <div className="poster">
-                    <img src={data.poster} height = "100%" width = "100%" style={{objectFit: "contain"}}/> 
                 </div>
             </div>
         )
