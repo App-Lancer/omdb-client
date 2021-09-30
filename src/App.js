@@ -14,7 +14,8 @@ class App extends Component {
       isCompareView: false,
       isSavedComparisonView : false,
       savedComparisons : [],
-      noRecordsFound : false
+      noRecordsFound : false,
+      maxComparisonScoreId: "",
     }
     this.onCardSelected = this.onCardSelected.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
@@ -55,7 +56,16 @@ class App extends Component {
         return elem.id != card.id
       })
     }
-    this.setState({selectedMovies: selectedMovies})
+    var maxScore = 0
+    var maxScoreId = ""
+    for (let movie of selectedMovies){
+      let score = parseFloat(movie.imdbRating)
+      if (score > maxScore){
+        maxScore = score
+        maxScoreId = movie.id
+      }
+    }
+    this.setState({selectedMovies: selectedMovies, maxComparisonScoreId: maxScoreId})
   }
 
   compare(event){
@@ -126,7 +136,7 @@ class App extends Component {
             </div>
             <div className="card-view compare">
               {this.state.selectedMovies.map((card)=>{
-                return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false} detailedView = {true} />;
+                return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false} detailedView = {true} heighlighted={card.id == this.state.maxComparisonScoreId} />;
               })}
             </div>
           </div>

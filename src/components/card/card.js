@@ -26,10 +26,10 @@ export default class Card extends Component {
     render() {
         let canBeSelected = this.props.canBeSelected || this.props.data.isSelected
         return(
-            <div className={this.props.detailedView ? "card detailed" : "card"}>
+            <div onClick={this.toggleCheckBox} className={this.props.detailedView ? (this.props.heighlighted ? "card detailed heighlighted" : "card detailed") : "card"}>
                 <div className="poster">
                     <img src={this.props.data.poster} style={{objectFit: 'cover'}}/>
-                    <div id = {`${this.props.data.id}_checkbox`} className={canBeSelected ? (this.props.data.isSelected ? "checkBox active" : "checkBox") : "checkBox disabled"} onClick={this.toggleCheckBox}>
+                    <div id = {`${this.props.data.id}_checkbox`} className={canBeSelected ? (this.props.data.isSelected ? "checkBox active" : "checkBox") : "checkBox disabled"}>
                         <div className="checkBox-fill"></div>
                     </div>
                 </div>
