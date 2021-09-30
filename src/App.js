@@ -36,9 +36,17 @@ class App extends Component {
   }
 
   compare(event){
-    this.setState({
-      isCompareView: !this.state.isCompareView
-    })
+    let target = event.target;
+    if(target.id == "compareView" || target.id == "compareButton"){
+      this.setState({
+        isCompareView: !this.state.isCompareView
+      })
+    }
+  }
+
+  saveCompare = (event)=>{
+    let target = document.getElementById("saveInput")
+    console.log(target.value)
   }
 
   render() {
@@ -48,22 +56,29 @@ class App extends Component {
           <input type="text" id="search" className="search" placeholder="Search" onChange={this.onInputChange}/>
           <div className="actions">
             <input type="button" className="saved-btn" value="Saved Comparisons"/>
-            <input type="button" className="saved-btn" value="Save"/>
           </div>
         </div>
         {this.state.selectedMovies.length > 1 ?
-          <input type="button" className="saved-btn compare-btn" value="Compare" onClick={this.compare}/> : null}
+          <input id="compareButton" type="button" className="saved-btn compare-btn" value="Compare" onClick={this.compare}/> : null}
         <div className="card-view">
           {this.state.dataSource.map((card)=>{
             return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={this.state.selectedMovies.length < 3 && !this.state.isCompareView}/>
           })}
         </div>
         {this.state.isCompareView ? 
-        <div className= "compareView" onClick={this.compare}> 
-          <div className="card-view compare">
-            {this.state.selectedMovies.map((card)=>{
-              return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false}/>
-            })}
+        <div id="compareView" className= "compareView" onClick={this.compare}>
+          <div className= "compareViewContent">
+            <div className="card-view compare">
+              {this.state.selectedMovies.map((card)=>{
+                return <Card data={card} onCardSelected={this.onCardSelected} canBeSelected={false}/>
+              })}
+            </div>
+            <div>
+              <input id="saveInput" type="text" className="search compare" placeholder="Name"/>
+            </div>
+            <div>
+              <input type="button" className="saved-btn" value="Save" onClick={this.saveCompare}/>
+            </div>
           </div>
         </div>:null
         }
